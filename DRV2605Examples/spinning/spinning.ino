@@ -4,7 +4,13 @@
 Adafruit_DRV2605 drv;
 
 void setup() {
-  drv.begin();
+  Serial.begin(9600);
+  while(!Serial);
+  if (!drv.begin() ){
+    Serial.println("No motor!");
+  }  else {
+    Serial.println("motor good");
+  }
 
   // I2C trigger by sending 'go' command
   drv.setMode(DRV2605_MODE_INTTRIG); // default, internal trigger when sending GO command
